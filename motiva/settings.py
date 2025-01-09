@@ -90,4 +90,4 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-GROQ_API_KEY = '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'
+GROQ_API_KEY = 'your gorq api key'
