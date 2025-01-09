@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Quotes Chat</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            margin: 20px auto;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: none;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: yellow;
+            color: black;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        #chat-history {
+            margin-top: 20px;
+            text-align: left;
+            max-width: 80%;
+            margin: 20px auto;
+            background: #222;
+            padding: 10px;
+            border-radius: 10px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+        .chat-entry {
+            margin-bottom: 10px;
+        }
+        .user-prompt {
+            color: yellow;
+            font-weight: bold;
+        }
+        .ai-response {
+            color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Quotes Chat</h1>
+    <form id="chat-form">
+        <input type="text" id="user_input" name="user_input" placeholder="Enter a word or phrase" required>
+        <button type="button" onclick="sendMessage()">Generate Quote</button>
+    </form>
+    <div id="chat-history"></div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user_input').value;
+            const chatHistory = document.getElementById('chat-history');
+
+            if (!userInput.trim()) {
+                const errorDiv = document.createElement('div');
+                errorDiv.textContent = "Please provide a word or phrase to generate quotes.";
+                errorDiv.style.color = "red";
+                chatHistory.appendChild(errorDiv);
+                return;
+            }
+
+            // Append user's input to chat history
+            const userPromptDiv = document.createElement('div');
+            userPromptDiv.className = "chat-entry user-prompt";
+            userPromptDiv.textContent = `You: ${userInput}`;
+            chatHistory.appendChild(userPromptDiv);
+
+            // Clear input field
+            document.getElementById('user_input').value = "";
+
+            fetch("/chat/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: new URLSearchParams({ user_input: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Append AI's response to chat history
+                const aiResponseDiv = document.createElement('div');
+                aiResponseDiv.className = "chat-entry ai-response";
+                aiResponseDiv.textContent = `AI: ${data.response || "No response received."}`;
+                chatHistory.appendChild(aiResponseDiv);
+
+                // Scroll to the bottom of the chat history
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                const errorDiv = document.createElement('div');
+                errorDiv.textContent = "An error occurred. Please try again.";
+                errorDiv.style.color = "red";
+                chatHistory.appendChild(errorDiv);
+            });
+        }
+    </script>
+</body>
+</html>

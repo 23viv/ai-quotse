@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - AI Quotes</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #000000, #1a1a1a, #333333);
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ensures the content spans the full viewport height */
+        }
+        h1 {
+            font-size: 50px;
+            margin: 20px 0;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #ffcc00;
+            animation: glow-text 2s infinite alternate;
+        }
+        @keyframes glow-text {
+            0% {
+                text-shadow: 0 0 5px #ffffff, 0 0 10px #ffcc00;
+            }
+            100% {
+                text-shadow: 0 0 20px #ffffff, 0 0 30px #ffcc00;
+            }
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .glow-button {
+            background-color: black;
+            color: white;
+            border: 2px solid #ffcc00;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            margin: 10px; /* Adds spacing between buttons */
+        }
+        .glow-button:hover {
+            box-shadow: 0 0 20px #ffcc00;
+            background-color: #333333;
+        }
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 16px;
+            color: white;
+            opacity: 0.8;
+        }
+        footer span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome Truth Seekers</h1>
+    <div class="button-container">
+        <a href="{% url 'login' %}" class="glow-button">Log In</a>
+        <a href="{% url 'signup' %}" class="glow-button">Sign Up</a>
+    </div>
+    <footer>
+        Made with <span>Brain 🧠</span>
+    </footer>
+</body>
+</html>
