@@ -155,28 +155,7 @@ Contributions are welcome! Please follow these steps:
 
 
 
----
-
-License
-
-This project is licensed under the MIT License.
-
-
----
-
-Troubleshooting
-
-MongoDB Connection Error:
-Ensure your MongoDB server is running and accessible.
-
-Groq API Key Error:
-Double-check the API key in your .env file and verify it is active in the Groq Developer Portal.
 
 
 
----
-
-Feel free to contact me at your-email@example.com for any questions or issues!
-
-This README includes all essential instructions for setting up and running your project while being user-friendly and suitable for GitHub.
 
